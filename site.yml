@@ -1,0 +1,7 @@
+---
+- hosts: pyconjp
+  become: true
+  roles:
+    - setup_debian
+    - setup_python
+    - setup_pyconjp

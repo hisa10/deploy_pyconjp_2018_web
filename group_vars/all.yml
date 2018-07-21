@@ -1,0 +1,28 @@
+---
+# Required Python version
+python27: 2.7.15
+python3: 3.7.0
+
+# PyCon JP specific vars
+pyconyear: 2018
+#gitrepos: https://github.com/pyconjp/pycon.jp.2018.git
+gitrepos: https://github.com/hisa10/docker_pyconjp_2018.git
+deploydest: /opt/workspace
+pyconusr: pyconjp
+pycongrp: pyconjp
+
+# Docker vars
+dockergrp: docker
+
+# Required OS packages
+debian_pkg:
+  - nginx-full
+  - python3-venv
+  - vim
+  - w3m
+
+# Python download url
+pipurl: https://bootstrap.pypa.io/get-pip.py
+pythonurl: https://www.python.org/ftp/python/
+pyenvrepo: https://github.com/pyenv/pyenv.git
+

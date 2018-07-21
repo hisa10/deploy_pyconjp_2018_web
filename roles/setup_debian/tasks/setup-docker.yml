@@ -1,0 +1,25 @@
+---
+- name: Install OS packages
+  apt:
+    name: '{{ item }}'
+    state: latest
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - gnupg2
+    - software-properties-common
+- name: Add Docker's official GPG key
+  shell: curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+- name: Add Docker repository
+  apt_repository:
+    repo: 'deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_lsb.codename }} stable'
+    state: present
+- name: Install Docker CE
+  apt:
+    name: docker-ce
+    state: latest
+- name: Install Docker compose
+  apt:
+    name: docker-compose
+    state: latest

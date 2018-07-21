@@ -1,0 +1,36 @@
+---
+- name: Check Python 2.7 existence
+  stat:
+    path: /usr/local/bin/python2.7
+  register: local_python27
+- name: Check Python 3.6 existence
+  stat:
+    path: /usr/local/bin/python3
+  register: local_python3
+- name: Setup pipenv
+  include: setup-pipenv.yml
+#- name: Check pip existence
+#  stat:
+#    path: /usr/bin/pip
+#  register: local_pip
+#- name: Setup Python {{ python27 }}
+#  vars:
+#    pyvers: '{{ python27 }}'
+#  include: setup-python.yml
+#  when: not local_python27.stat.exists
+#- name: Setup Python {{ python3 }}
+#  vars:
+#    pyvers: '{{ python3 }}'
+#  include: setup-python.yml
+#  when: not local_python3.stat.exists
+#- name: Setup pip
+#  include: setup-pip.yml
+#  when: not local_pip.stat.exists
+#- name: Install virtualenv
+#  pip:
+#    name: virtualenv
+#    state: latest
+#- name: Install pexpect (required for provisioning with Ansible)
+#  pip:
+#    name: pexpect
+#    state: latest

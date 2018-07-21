@@ -1,0 +1,28 @@
+---
+- name: Create directories
+  file:
+    path: '{{ item }}'
+    state: directory
+    mode: 0755
+  with_items:
+    - $HOME/.local/bin
+    - $HOME/.local/venvs
+  become: True
+  become_user: '{{ pyconusr }}'
+- name: Setup venv
+  command: python3 -m venv $HOME/.local/venvs/pipenv
+  become: True
+  become_user: '{{ pyconusr }}'
+- name: Setup pipenv
+  pip:
+    name: pipenv
+    state: present
+    executable: $HOME/.local/venvs/pipenv/bin/pip
+  become: True
+  become_user: '{{ pyconusr }}'
+- file:
+    path: $HOME/.local/bin/pipenv
+    state: link
+    src: $HOME/.local/venvs/pipenv/bin/pipenv
+  become: True
+  become_user: '{{ pyconusr }}'

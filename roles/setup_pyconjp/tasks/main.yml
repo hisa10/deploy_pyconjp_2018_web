@@ -1,0 +1,21 @@
+---
+- name: Prepare web directory
+  file:
+    dest: '{{ deploydest }}'
+    state: directory
+    owner: '{{ pyconusr }}'
+    group: '{{ pycongrp }}'
+    mode: 0755
+- name: Clone web repository
+  git:
+    repo: '{{ gitrepos }}'
+    dest: '{{ deploydest }}/pyconjp-{{ pyconyear }}'
+    force: yes
+  become: True
+  become_user: '{{ pyconusr }}'
+- name: Start web service
+  shell: docker-compose up -d
+  args:
+    chdir: '{{ deploydest }}/pyconjp-{{ pyconyear }}'
+  become: True
+  become_user: '{{ pyconusr }}'

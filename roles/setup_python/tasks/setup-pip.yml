@@ -1,0 +1,19 @@
+---
+- name: Check get-pip file
+  local_action: stat path='provisioning/files/get-pip.py'
+  register: pythonsrc
+  become: false
+- name: Download pip installer
+  local_action: get_url url='{{ pipurl }}' dest=provisioning/files/get-pip.py
+  become: false
+- name: Copy pip installer
+  copy:
+    src: files/get-pip.py
+    dest: /tmp/get-pip.py
+    mode: 0755
+- name: Install pip
+  shell: /tmp/get-pip.py
+- name: Cleanup pip installer
+  file:
+    dest: /tmp/get-pip.py
+    state: absent

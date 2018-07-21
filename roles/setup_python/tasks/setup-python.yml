@@ -1,0 +1,25 @@
+---
+- name: Check Python {{ pyvers }} source tarball
+  local_action: stat path='provisioning/files/Python-{{ pyvers }}.tgz'
+  register: pythonsrc
+  become: false
+- name: Download Python {{ pyvers }} source tarball
+  local_action: get_url url='{{ pythonurl }}/{{ pyvers }}/Python-{{ pyvers }}.tgz' dest=provisioning/files/
+  become: false
+  when: not pythonsrc.stat.exists
+- name: Extract Python-{{ pyvers }} source
+  unarchive:
+    src: 'files/Python-{{ pyvers }}.tgz'
+    dest: /usr/local/src
+- name: Configure Python-{{ pyvers }}
+  shell: ./configure
+  args:
+    chdir: '/usr/local/src/Python-{{ pyvers }}'
+- name: Build Python-{{ pyvers }}
+  make:
+    chdir: '/usr/local/src/Python-{{ pyvers }}'
+    target: all
+- name: Install Python-{{ pyvers }}
+  make:
+    chdir: '/usr/local/src/Python-{{ pyvers }}'
+    target: install
