@@ -19,6 +19,7 @@
   apt:
     name: docker-ce
     state: latest
+    update_cache: yes
 - name: Install Docker compose
   apt:
     name: docker-compose

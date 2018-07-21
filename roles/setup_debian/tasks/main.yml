@@ -2,6 +2,7 @@
 - name: Update all installed packages
   apt:
     upgrade: full
+    update_cache: yes
 - name: Install required packages
   apt:
     name: '{{ item }}'
