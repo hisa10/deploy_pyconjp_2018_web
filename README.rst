@@ -1,6 +1,6 @@
-==========================
-deploy_pyconjp_2018_ubuntu
-==========================
+=======================
+deploy_pyconjp_2018_web
+=======================
 
 Ansible playbook for deploy PyCon JP 2018 Website in Debian server.
 
