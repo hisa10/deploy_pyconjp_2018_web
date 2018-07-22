@@ -16,7 +16,8 @@ dockergrp: docker
 
 # Required OS packages
 debian_pkg:
-  - nginx-full
+  - curl
+  - git
   - python3-venv
   - vim
   - w3m
