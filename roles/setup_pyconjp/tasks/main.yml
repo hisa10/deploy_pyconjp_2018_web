@@ -13,6 +13,13 @@
     force: yes
   become: True
   become_user: '{{ pyconusr }}'
+- name: Rewrite docker-compose.yml
+  replace:
+    path: '{{ deploydest }}/pyconjp-{{ pyconyear }}/docker-compose.yml'
+    regexp: '- GIT_BRANCH=dev'
+    replace: '- GIT_BRANCH={{ deploybranch }}'
+  become: True
+  become_user: '{{ pyconusr }}'
 - name: Start web service
   shell: docker-compose up -d
   args:

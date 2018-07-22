@@ -58,9 +58,12 @@ Person
 クライアント側準備
 ------------------
 
-1. ~/.ssh/configでIdentitiFileを適切に設定する
-2. Ansibleのhostsファイルの[pyconjp]セクションにサーバのホスト名を設定する
+1. Ansibleをインストールする (pipでインストール可能)
+2. ~/.ssh/configでIdentitiFileを適切に設定する
+3. Ansibleのhostsファイルの[pyconjp]セクションにサーバのホスト名を設定する
    または~/.ssh/configの設定をhostsに合わせる
+4. group_vars/all.yml内のdeploybranch行を、pycon.jp.2018リポジトリ内のデプロイ対象にしたいbranch名に設定する
+
 
 デプロイ
 --------

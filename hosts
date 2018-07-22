@@ -1,5 +1,5 @@
 [pyconjp]
-pycontest2018
+pyconjp2018
 
 [pyconjp:vars]
 ansible_ssh_user=root

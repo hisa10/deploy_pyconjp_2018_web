@@ -8,6 +8,8 @@ pyconyear: 2018
 #gitrepos: https://github.com/pyconjp/pycon.jp.2018.git
 gitrepos: https://github.com/hisa10/docker_pyconjp_2018.git
 deploydest: /opt/workspace
+#deploybranch: master
+deploybranch: dev
 pyconusr: pyconjp
 pycongrp: pyconjp
 
