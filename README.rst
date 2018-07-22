@@ -34,7 +34,7 @@ Client
 Person
 ------
 
-- Who can operates Linux internet server
+- Who can operates Linux internet server correctly
 
 
 手順
@@ -43,7 +43,7 @@ Person
 サーバ側準備
 ------------
 
-以下、内容を読んで操作内容が理解できることが必要条件のため、あえて具体的なコマンドは書きません。
+以下、内容を読んで操作方法が理解できることが必要条件のため、あえて具体的なコマンドは書きません。
 
 1. Debian 9をインストール (またはインスタンスを起動)
 2. 以下のパッケージをインストール
@@ -71,11 +71,17 @@ Person
 ansible-playbook -i hosts site.yml
 
 
-動作確認環境
-============
+運用
+====
 
-- さくらのクラウド
-- VirtualBox上に手動インストールしたDebian
+起動・終了
+----------
+
+- デプロイ完了した時点で、最新版のサイトがDockerで起動し、port 4000でlistenする
+- 起動: docker-compose start
+- 終了: docker-compose stop
+- アップデート: docker-compose build
+  うまくいかない場合は、--no-cacheをつける
 
 
 ToDo
