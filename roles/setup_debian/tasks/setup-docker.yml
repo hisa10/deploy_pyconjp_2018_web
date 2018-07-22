@@ -1,5 +1,5 @@
 ---
-- name: Install OS packages
+- name: Install Docker related OS packages
   apt:
     name: '{{ item }}'
     state: latest
