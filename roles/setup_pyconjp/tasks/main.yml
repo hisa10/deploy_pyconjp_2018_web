@@ -35,6 +35,7 @@
     group: '{{ pycongrp }}'
 - name: Setup crontab
   cron:
+    name: update-web
     cron_file: /etc/crontab
     minute: 0
     hour: 4
