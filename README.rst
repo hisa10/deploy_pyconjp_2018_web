@@ -93,5 +93,5 @@ ansible-playbook -i hosts site.yml
 ToDo
 ====
 
-- ~~Firewall等の設定~~
+- ~~ Firewall等の設定 ~~
   クラウド側のフィルタ設定で行う方向で。
