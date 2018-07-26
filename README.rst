@@ -81,7 +81,6 @@ ansible-playbook -i hosts site.yml
 - 起動: docker-compose start
 - 終了: docker-compose stop
 - アップデート: /opt/workspace/update-web.sh
-  うまくいかない場合は、--no-cacheをつける
 
 ブランチ切り替え
 ----------------
