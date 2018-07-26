@@ -26,3 +26,20 @@
     chdir: '{{ deploydest }}/pyconjp-{{ pyconyear }}'
   become: True
   become_user: '{{ pyconusr }}'
+- name: Copy update-web script
+  copy:
+    src: '{{ role_path }}/files/update-web.sh'
+    dest: '{{ deploydest }}/update-web.sh'
+    mode: 0755
+    owner: '{{ pyconusr }}'
+    group: '{{ pycongrp }}'
+- name: Setup crontab
+  cron:
+    cron_file: /etc/crontab
+    minute: 0
+    hour: 4
+    day: '*'
+    month: '*'
+    weekday: '*'
+    user: '{{ pyconusr }}'
+    job: '{{ deploydest }}/update-web.sh >/dev/null 2>&1'
