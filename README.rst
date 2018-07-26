@@ -77,6 +77,8 @@ ansible-playbook -i hosts site.yml
 起動・終了
 ----------
 
+操作はpyconjpユーザ権限で行う。rootでログインしている場合は、su - pyconjpを先に行う。
+
 - デプロイ完了した時点で、最新版のサイトがDockerで起動し、port 4000でlistenする
 - 起動: docker-compose start
 - 終了: docker-compose stop
