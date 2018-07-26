@@ -88,10 +88,3 @@ ansible-playbook -i hosts site.yml
 
 1. /opt/workspace/pyconjp-2018/docker-compose.yml を編集し、GIT_BRANCH 環境変数を書き換える
 2. /opt/workspace/update-web.sh を実行する
-
-
-ToDo
-====
-
-- ~~ Firewall等の設定 ~~
-  クラウド側のフィルタ設定で行う方向で。
