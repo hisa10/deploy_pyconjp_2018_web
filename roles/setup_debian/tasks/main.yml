@@ -45,5 +45,8 @@
     owner: '{{ pyconusr }}'
     group: '{{ pycongrp }}'
     state: present
-
+- name: Use vim as default editor
+  alternatives:
+    name: editor
+    path: /usr/bin/vim.basic
 
