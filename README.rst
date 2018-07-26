@@ -80,12 +80,18 @@ ansible-playbook -i hosts site.yml
 - デプロイ完了した時点で、最新版のサイトがDockerで起動し、port 4000でlistenする
 - 起動: docker-compose start
 - 終了: docker-compose stop
-- アップデート: docker-compose build
+- アップデート: /opt/workspace/update-web.sh
   うまくいかない場合は、--no-cacheをつける
+
+ブランチ切り替え
+----------------
+
+1. /opt/workspace/pyconjp-2018/docker-compose.yml を編集し、GIT_BRANCH 環境変数を書き換える
+2. /opt/workspace/update-web.sh を実行する
 
 
 ToDo
 ====
 
-- Firewall等の設定
-
+- ~~Firewall等の設定~~
+  クラウド側のフィルタ設定で行う方向で。
