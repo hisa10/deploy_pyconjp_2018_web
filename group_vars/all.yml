@@ -6,7 +6,7 @@ python3: 3.7.0
 # PyCon JP specific vars
 pyconyear: 2018
 #gitrepos: https://github.com/pyconjp/pycon.jp.2018.git
-gitrepos: https://github.com/hisa10/docker_pyconjp_2018.git
+gitrepos: https://github.com/pyconjp/docker_pyconjp_2018.git
 deploydest: /opt/workspace
 #deploybranch: master
 deploybranch: dev
