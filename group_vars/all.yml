@@ -23,6 +23,12 @@ debian_pkg:
   - python3-venv
   - vim
   - w3m
+ubuntu_pkg:
+  - curl
+  - git
+  - python3-venv
+  - vim
+  - w3m
 
 # Python download url
 pipurl: https://bootstrap.pypa.io/get-pip.py

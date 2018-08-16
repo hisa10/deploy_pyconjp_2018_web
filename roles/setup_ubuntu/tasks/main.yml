@@ -1,0 +1,52 @@
+---
+- name: Update all installed packages
+  apt:
+    upgrade: full
+    update_cache: yes
+- name: Install required packages
+  apt:
+    name: '{{ item }}'
+    state: present
+  with_items: '{{ ubuntu_pkg }}'
+- name: Install Docker CE
+  include: setup-docker.yml
+- name: Create pyconjp group
+  group:
+    name: '{{ pycongrp }}'
+    state: present
+- name: Create pyconjp user
+  user:
+    name: '{{ pyconusr }}'
+    group: '{{ pycongrp }}'
+    groups: '{{ dockergrp }}'
+    home: '{{ deploydest }}'
+    shell: /bin/bash
+    state: present
+    createhome: yes
+    generate_ssh_key: yes
+    ssh_key_type: ed25519
+- name: Setup locale
+  lineinfile:
+    path: '{{ deploydest }}/.profile'
+    line: '{{ item }}'
+    owner: '{{ pyconusr }}'
+    group: '{{ pycongrp }}'
+    state: present
+  with_items:
+    - export LC_ALL=C.UTF-8
+    - export LANG=C.UTF-8 
+- name: Add .local/bin to PATH
+  blockinfile:
+    path: '{{ deploydest }}/.profile'
+    block: |
+      if [ -d "$HOME/.local/bin" ] ; then
+          PATH="$HOME/.local/bin:$PATH"
+      fi
+    owner: '{{ pyconusr }}'
+    group: '{{ pycongrp }}'
+    state: present
+- name: Use vim as default editor
+  alternatives:
+    name: editor
+    path: /usr/bin/vim.basic
+
