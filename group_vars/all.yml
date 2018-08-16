@@ -8,8 +8,9 @@ pyconyear: 2018
 #gitrepos: https://github.com/pyconjp/pycon.jp.2018.git
 gitrepos: https://github.com/pyconjp/docker_pyconjp_2018.git
 deploydest: /opt/workspace
-#deploybranch: master
-deploybranch: dev
+deploybranch:
+  - { name: dev, port: 4001 }
+  - { name: master, port: 4000 }
 pyconusr: pyconjp
 pycongrp: pyconjp
 

@@ -9,23 +9,34 @@
 - name: Clone web repository
   git:
     repo: '{{ gitrepos }}'
-    dest: '{{ deploydest }}/pyconjp-{{ pyconyear }}'
+    dest: '{{ deploydest }}/pyconjp-{{ pyconyear }}-{{ item.name }}'
     force: yes
   become: True
   become_user: '{{ pyconusr }}'
-- name: Rewrite docker-compose.yml
+  with_items: '{{ deploybranch }}'
+- name: Rewrite branch setting in docker-compose.yml
   replace:
-    path: '{{ deploydest }}/pyconjp-{{ pyconyear }}/docker-compose.yml'
-    regexp: '- GIT_BRANCH=dev'
-    replace: '- GIT_BRANCH={{ deploybranch }}'
+    path: '{{ deploydest }}/pyconjp-{{ pyconyear }}-{{ item.name }}/docker-compose.yml'
+    regexp: '- GIT_BRANCH=master'
+    replace: '- GIT_BRANCH={{ item.name }}'
   become: True
   become_user: '{{ pyconusr }}'
+  with_items: '{{ deploybranch }}'
+- name: Rewrite port setting in docker-compose.yml
+  replace:
+    path: '{{ deploydest }}/pyconjp-{{ pyconyear }}-{{ item.name }}/docker-compose.yml'
+    regexp: '- "4000:4000"'
+    replace: '- "{{ item.port }}:4000"'
+  become: True
+  become_user: '{{ pyconusr }}'
+  with_items: '{{ deploybranch }}'
 - name: Start web service
   shell: docker-compose up -d
   args:
-    chdir: '{{ deploydest }}/pyconjp-{{ pyconyear }}'
+    chdir: '{{ deploydest }}/pyconjp-{{ pyconyear }}-{{ item.name }}'
   become: True
   become_user: '{{ pyconusr }}'
+  with_items: '{{ deploybranch }}'
 - name: Copy update-web script
   copy:
     src: '{{ role_path }}/files/update-web.sh'
@@ -37,10 +48,11 @@
   cron:
     name: update-web
     cron_file: /etc/crontab
-    minute: 0
-    hour: 4
+    minute: 15,45 
+    hour: '*' 
     day: '*'
     month: '*'
     weekday: '*'
     user: '{{ pyconusr }}'
-    job: '{{ deploydest }}/update-web.sh >/dev/null 2>&1'
+    job: '{{ deploydest }}/update-web.sh all >/dev/null 2>&1'
+  with_items: '{{ deploybranch }}'
